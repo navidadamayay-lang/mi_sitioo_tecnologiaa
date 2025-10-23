@@ -1,1 +1,440 @@
-<h1></h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inteligencia Artificial ULTRA SUPREMO 3D</title>
+<!-- jsPDF necesario para generar PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@700&family=Pacifico&display=swap');
+
+/* Reset */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    font-family:'Roboto',sans-serif;
+    color:#fff;
+    background:#0a0a0a;
+    overflow-x:hidden;
+    position:relative;
+    text-align:center;
+    font-weight:700;
+}
+
+/* Canvas fondo 3D supremo */
+canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;}
+
+/* Secciones */
+.section{
+    display:none;
+    position:relative;
+    min-height:100vh;
+    padding:60px 20px 40px 20px;
+    z-index:1;
+    transition:opacity 1s;
+}
+.active{display:block;opacity:1;}
+
+/* Títulos neon dinámicos 3D */
+h1,h2{
+    font-weight:700;
+    text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff,0 0 50px #0ff;
+    animation:neonGlow 2s infinite alternate;
+    background:rgba(0,0,0,0.4);
+    display:inline-block;
+    padding:15px 25px;
+    border-radius:15px;
+    margin:auto;
+    text-align:center;
+}
+h1{
+    font-size:4em;
+    font-family:'Orbitron',sans-serif;
+    margin-top:60px;
+}
+h2{
+    font-size:3em;
+    font-family:'Pacifico',cursive;
+    margin:30px 0;
+}
+
+/* Párrafos */
+p{
+    font-size:1.2em;
+    text-align:center;
+    background:rgba(0,0,0,0.4);
+    padding:12px;
+    border-radius:12px;
+    text-shadow:1px 1px 2px #000;
+    font-family:'Roboto',sans-serif;
+    font-weight:700;
+}
+
+/* Contenedor de imágenes lado a lado */
+.img-pair{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:30px;
+    flex-wrap:wrap;
+    margin:20px 0;
+}
+.img-pair img{
+    max-width:48%;
+    border:4px solid #0ff;
+    border-radius:15px;
+    box-shadow:0 0 40px #0ff,0 0 80px #0ff inset;
+    animation:float3D 6s ease-in-out infinite;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background:rgba(0,0,0,0.4);
+}
+.img-pair img:hover{
+    transform:translateY(-20px) rotateY(15deg) scale(1.08);
+    box-shadow:0 0 60px #0ff,0 0 120px #0ff inset;
+}
+
+/* Botones neon dinámicos */
+button{
+    background:#0ff;
+    border:none;
+    color:#000;
+    padding:14px 30px;
+    margin:10px;
+    font-size:1em;
+    cursor:pointer;
+    border-radius:15px;
+    text-shadow:1px 1px 2px #000;
+    font-family:'Roboto',sans-serif;
+    font-weight:700;
+    transition:0.3s;
+}
+button:hover{
+    animation:neonColor 2s infinite alternate;
+    box-shadow:0 0 40px #0ff,0 0 80px #0ff inset;
+}
+
+/* Pie de página */
+footer{
+    text-align:center;
+    padding:20px;
+    font-size:1em;
+    color:#0ff;
+    text-shadow:0 0 10px #0ff;
+    position:relative; 
+    z-index:2;
+    font-weight:700;
+}
+
+/* Video */
+.video-container{
+    position: relative; 
+    padding-bottom: 30%; 
+    height:0; 
+    overflow:hidden; 
+    max-width:30%; 
+    margin:20px auto;
+}
+.video-container iframe, .video-container video{
+    position:absolute; 
+    top:0; 
+    left:0; 
+    width:100%; 
+    height:100%; 
+    border:0;
+}
+
+/* Formulario */
+form{
+    max-width:400px;
+    margin:20px auto;
+    display:flex;
+    flex-direction:column;
+}
+form input, form textarea{
+    padding:14px;
+    margin:10px 0;
+    border-radius:12px;
+    border:none;
+    font-size:1em;
+    font-family:'Roboto',sans-serif;
+    font-weight:700;
+}
+form button{align-self:center;}
+
+/* Animaciones */
+@keyframes float3D{
+    0%,100%{transform:translateY(0) rotateY(0deg) scale(1);}
+    25%{transform:translateY(-25px) rotateY(15deg) scale(1.08);}
+    50%{transform:translateY(0) rotateY(30deg) scale(1);}
+    75%{transform:translateY(-15px) rotateY(-10deg) scale(1.05);}
+}
+@keyframes neonGlow{
+    0%{text-shadow:0 0 10px #0ff,0 0 20px #0ff;}
+    50%{text-shadow:0 0 40px #0ff,0 0 80px #0ff;}
+    100%{text-shadow:0 0 10px #0ff,0 0 20px #0ff;}
+}
+@keyframes neonColor{
+    0%{background:#0ff;color:#000;}
+    25%{background:#f0f;color:#000;}
+    50%{background:#ff0;color:#000;}
+    75%{background:#0f0;color:#000;}
+    100%{background:#0ff;color:#000;}
+}
+.img-label{
+    text-align:center;
+    font-size:1.2em;
+    margin-top:5px;
+    color:#ff0;
+    text-shadow:0 0 8px #ff0;
+    cursor:pointer;
+    font-family:'Pacifico',cursive;
+    font-weight:700;
+}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+
+<!-- SECCIONES -->
+<div id="inicio" class="section active">
+  <h1>Inteligencia Artificial</h1>
+  <p>La inteligencia artificial… una mente creada por el ser humano, capaz de aprender, analizar y decidir. Cada día se vuelve más presente, más silenciosa, más inteligente. Pero… ¿realmente comprendemos su alcance? ¿Hasta dónde podrá llegar una inteligencia que no es humana? 🤖✨</p>
+  <div class="img-pair">
+    <img src="inteligencia.jpg.jpg" alt="AI Robot">
+    <img src="robot.jpg.jpg" alt="AI Tech">
+  </div>
+  <div>
+    <button onclick="showSection('info')">Información General</button>
+    <button onclick="showSection('avances')">Avances</button>
+    <button onclick="showSection('futuro')">Futuro</button>
+    <button onclick="showSection('contacto')">Contacto</button>
+  </div>
+  <footer>Creado por:Yohana Amaya</footer>
+</div>
+
+<div id="info" class="section">
+  <h2>Información General</h2>
+  <p>
+   La Inteligencia Artificial (IA) es una rama de la informática y la ingeniería que busca crear sistemas y máquinas capaces de realizar tareas que normalmente requieren inteligencia humana, como:
+
+Razonar y tomar decisiones.
+
+Aprender de experiencias o datos.
+
+Reconocer patrones y objetos.
+
+Interpretar lenguaje natural y emociones.
+
+Resolver problemas complejos de manera autónoma.
+
+
+El término fue acuñado en 1956 por John McCarthy en la conferencia de Dartmouth, marcando el inicio formal del campo. Desde entonces, la IA ha evolucionado desde programas simples para juegos o cálculos matemáticos hasta sistemas complejos que analizan grandes cantidades de datos, comprenden el lenguaje humano y realizan tareas físicas mediante robots.
+
+🧠 Tipos de Inteligencia Artificial
+
+1. IA Débil o Estrecha (Narrow AI):
+Diseñada para realizar tareas específicas. No tiene conciencia ni entendimiento general.
+Ejemplo: Asistentes virtuales como Siri, Alexa o chatbots de atención al cliente.
+
+
+2. IA Fuerte o General (AGI – Artificial General Intelligence):
+Capaz de aprender, razonar y resolver problemas de manera autónoma en cualquier área. Aún está en desarrollo.
+
+
+3. Superinteligencia Artificial:
+Sería una IA que supera la inteligencia humana en todos los aspectos, incluyendo creatividad, toma de decisiones y resolución de problemas complejos. Esta idea es teórica y plantea grandes debates éticos.
+  </p>
+  <div class="img-pair">
+    <img src="tarea.jpg.jpg" alt="AI Tech">
+    <img src="chatgpt.jpg.jpg" alt="Robot AI">
+  </div>
+  <div class="img-label" onclick="alert('Inteligencia Artificial aplicada')">AI Aplicada</div>
+  <div class="video-container">
+  <iframe src="https://www.youtube.com/embed/_tA5cinv0U8" title="Video Inteligencia Artificial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+  <div>
+    <button onclick="showSection('inicio')">Página Principal</button>
+    <button onclick="showSection('avances')">Avances</button>
+  </div>
+  <footer>Creado por:Yohana Amaya</footer>
+</div>
+
+<div id="avances" class="section">
+  <h2>Avances</h2>
+  <p>En las últimas décadas, la IA ha tenido avances significativos que han transformado la vida moderna y diversos sectores:
+
+1. Aprendizaje Automático (Machine Learning):
+
+Permite que los sistemas aprendan a partir de datos y mejoren su rendimiento sin programación directa.
+Ejemplo: Recomendaciones de Netflix o YouTube según tus hábitos.
+
+2. Aprendizaje Profundo (Deep Learning):
+
+Utiliza redes neuronales artificiales que imitan el cerebro humano, capaces de procesar imágenes, sonidos y texto con gran precisión.
+Ejemplo: Reconocimiento facial, diagnóstico médico automatizado, vehículos autónomos.
+
+3. Procesamiento de Lenguaje Natural (NLP):
+
+La IA puede entender, interpretar y generar lenguaje humano, facilitando la comunicación entre máquinas y personas.
+Ejemplo: ChatGPT, traductores automáticos, asistentes virtuales.
+
+4. Visión por Computadora:
+
+Capacidad de analizar y comprender imágenes y videos.
+Ejemplo: Sistemas de vigilancia, coches autónomos, identificación de enfermedades en radiografías.
+
+5. Robótica Inteligente:
+
+Integración de IA en robots físicos para ejecutar tareas complejas de manera autónoma.
+Ejemplo: Robots quirúrgicos, drones de entrega, exploración espacial.
+
+6. Sistemas Expertos:
+
+Programas que simulan la toma de decisiones de un especialista humano, aplicados en medicina, finanzas o ingeniería.
+
+7. Impacto social y económico:
+
+Mejora la eficiencia y productividad en empresas e industrias.
+
+Automatiza tareas repetitivas y riesgosas.
+
+Optimiza recursos en agricultura, energía y transporte.</p>
+  <div class="img-pair">
+    <img src="vehiculo.jpg.jpg" alt="Robot AI">
+    <img src="medicina.jpg.jpg" alt="Futuro IA">
+  </div>
+  <div class="img-label" onclick="alert('Robot avanzado con IA')">Robot IA</div>
+  <div>
+    <button onclick="showSection('info')">Anterior</button>
+    <button onclick="showSection('futuro')">Futuro</button>
+  </div>
+  <footer>Creado por:Yohana Amaya</footer>
+</div>
+
+<div id="futuro" class="section">
+  <h2>Futuro</h2>
+  <p>El futuro de la IA promete innovaciones revolucionarias, pero también desafíos importantes:
+
+1. Desarrollo de IA General y Superinteligencia:
+
+Sistemas capaces de aprender y adaptarse en cualquier área, con habilidades superiores al humano. Esto podría transformar la ciencia, la educación, la medicina y la tecnología.
+
+2. Automatización avanzada y empleo:
+
+Muchos trabajos serán automatizados, pero surgirán nuevas profesiones relacionadas con programación, supervisión y ética de la IA.
+
+3. Educación personalizada:
+
+Sistemas que adaptan el aprendizaje al ritmo y estilo de cada estudiante, mejorando la comprensión y el rendimiento académico.
+
+4. Medicina de precisión:
+
+La IA podrá analizar genomas, predecir enfermedades y recomendar tratamientos altamente personalizados.
+
+5. Robots y asistentes más humanos:
+
+Se espera la creación de robots capaces de interactuar emocionalmente, ayudar en tareas domésticas y asistir a personas mayores o con discapacidad.
+
+6. Ética, regulación y seguridad:
+
+Será fundamental establecer normas para garantizar un uso responsable y seguro de la IA, protegiendo la privacidad y evitando abusos.
+
+7. Impacto en la sociedad y el medio ambiente:
+
+La IA contribuirá a optimizar recursos, reducir desperdicios, mejorar la sostenibilidad y enfrentar problemas globales como el cambio climático o la escasez de alimentos.</p>
+  <div class="img-pair">
+    <img src="futuro.jpg.jpg" alt="Futuro IA">
+    <img src="futuro2.jpg.jpg" alt="AI Robot">
+  </div>
+  <div>
+    <button onclick="showSection('avances')">Anterior</button>
+    <button onclick="showSection('contacto')">Contacto</button>
+  </div>
+  <footer>Creado por:Yohana Amaya</footer>
+</div>
+
+<div id="contacto" class="section">
+  <h2>Contacto</h2>
+  <form id="contactForm">
+    <input type="text" placeholder="Nombre" required>
+    <input type="email" placeholder="Correo" required>
+    <textarea placeholder="Mensaje" rows="4" required></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+  <div class="img-pair">
+    <img src="mensaje.jpg.jpg" alt="AI Tech">
+  </div>
+  <div>
+    <button onclick="showSection('futuro')">Anterior</button>
+  </div>
+  <footer>Creado por:Yohana Amaya</footer>
+</div>
+
+<script>
+// Navegación
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// Formulario PDF
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const form=this;
+  const nombre=form.elements[0].value||'Sin nombre';
+  const correo=form.elements[1].value||'Sin correo';
+  const mensaje=form.elements[2].value||'';
+  const { jsPDF } = window.jspdf;
+  const doc=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
+  doc.setFillColor(10,10,10); doc.rect(0,0,210,297,"F");
+  doc.setDrawColor(0,255,255); doc.setLineWidth(2.5); doc.rect(6,6,198,285);
+  const logoUrl="https://i.ibb.co/N6r2GgV/ai-robot.jpg";
+  const img=new Image(); img.crossOrigin="anonymous"; img.src=logoUrl;
+  img.onload=function(){
+    try{doc.addImage(img,"JPEG",85,12,40,40);}catch(err){console.warn(err);}
+    doc.setTextColor(0,255,255); doc.setFont("helvetica","bold"); doc.setFontSize(18);
+    doc.text("Mensaje de Contacto - IA ULTRA SUPREMO 3D",105,62,{align:"center"});
+    doc.setFontSize(12); doc.setTextColor(255,255,255); doc.setFont("helvetica","normal");
+    doc.text(`Nombre: ${nombre}`,15,85); doc.text(`Correo: ${correo}`,15,95);
+    const lines=doc.splitTextToSize(mensaje||"(sin mensaje)",180); doc.text(lines,15,110);
+    const linkText="⬅ Volver a la página principal"; const textWidth=doc.getTextWidth(linkText);
+    const xCenter=(210-textWidth)/2; doc.setTextColor(255,215,0); doc.textWithLink(linkText,xCenter,270,{url:window.location.origin+window.location.pathname});
+    doc.save(`Mensaje_${nombre.replace(/[^a-z0-9-_]/gi,'_')||'sin_nombre'}.pdf`);
+    alert('Gracias por tu mensaje! Se ha generado un PDF con diseño profesional.'); form.reset(); showSection('inicio');
+  };
+  img.onerror=function(){
+    doc.setTextColor(0,255,255); doc.setFont("helvetica","bold"); doc.setFontSize(18);
+    doc.text("Mensaje de Contacto - IA ULTRA SUPREMO 3D",105,62,{align:"center"});
+    doc.setFontSize(12); doc.setTextColor(255,255,255); doc.setFont("helvetica","normal");
+    doc.text(`Nombre: ${nombre}`,15,85); doc.text(`Correo: ${correo}`,15,95);
+    const lines=doc.splitTextToSize(mensaje||"(sin mensaje)",180); doc.text(lines,15,110);
+    const linkText="⬅ Volver a la página principal"; const textWidth=doc.getTextWidth(linkText);
+    const xCenter=(210-textWidth)/2; doc.setTextColor(255,215,0);
+    doc.textWithLink(linkText,xCenter,270,{url:window.location.origin+window.location.pathname});
+    doc.save(`Mensaje_${nombre.replace(/[^a-z0-9-_]/gi,'_')||'sin_nombre'}.pdf`);
+    alert('Gracias por tu mensaje! Se ha generado un PDF con diseño profesional.'); form.reset(); showSection('inicio');
+  };
+});
+
+// Fondo ULTRA SUPREMO
+const canvas=document.getElementById('bg'); const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+let particles=[],rays=[],stars=[],mouse={x:canvas.width/2,y:canvas.height/2};
+for(let i=0;i<400;i++) particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5+0.5});
+for(let i=0;i<50;i++) rays.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,l:Math.random()*300+100});
+for(let i=0;i<150;i++) stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.2+0.2,phase:Math.random()*Math.PI*2});
+document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+document.addEventListener('click',()=>{for(let i=0;i<10;i++) particles.push({x:mouse.x,y:mouse.y,r:Math.random()*2+1});});
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let p of particles){let dx=(p.x-mouse.x)*0.0005,dy=(p.y-mouse.y)*0.0005;p.x+=dx;p.y+=dy;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='white';ctx.fill();}
+  for(let r of rays){ctx.beginPath();ctx.moveTo(r.x,r.y);ctx.lineTo(r.x+r.l*Math.cos(Math.random()*Math.PI*2),r.y+r.l*Math.sin(Math.random()*Math.PI*2));ctx.strokeStyle='rgba('+(Math.floor(Math.random()*255))+','+(Math.floor(Math.random()*255))+',255,0.2)';ctx.lineWidth=2;ctx.stroke();r.x+=(Math.random()-0.5)*2;r.y+=(Math.random()-0.5)*2;}
+  for(let s of stars){s.phase+=0.05;ctx.beginPath();ctx.arc(s.x,s.y, s.r*Math.abs(Math.sin(s.phase)),0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.8)';ctx.fill();}
+  for(let i=0;i<particles.length;i++){for(let j=i+1;j<particles.length;j++){let dx=particles[i].x-particles[j].x;let dy=particles[i].y-particles[j].y;let dist=Math.sqrt(dx*dx+dy*dy);if(dist<120){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle='rgba(0,255,255,'+(1-dist/120)+')';ctx.lineWidth=1;ctx.stroke();}}}
+  requestAnimationFrame(animate);
+}
+animate();
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+</script>
+</body>
+</html>
